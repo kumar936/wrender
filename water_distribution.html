@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .header-left {
@@ -68,9 +69,31 @@
             border: none;
         }
 
+        .page-heading-block {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 20px 30px;
+            text-align: center;
+            border-bottom: 2px solid #2196F3;
+        }
+
+        .page-heading {
+            font-size: 22px;
+            color: #1a237e;
+            margin: 0 0 6px 0;
+            font-weight: 700;
+        }
+
+        .page-caption {
+            font-size: 14px;
+            color: #2c5aa0;
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
         #canvas-container {
             width: 100vw;
-            height: calc(100vh - 70px);
+            height: calc(100vh - 160px);
             background: white;
             position: relative;
             overflow: hidden;
@@ -169,8 +192,22 @@
         }
 
         .flow-dot {
-            fill: #4FC3F7;
-            opacity: 0.9;
+            fill: url(#flowDotGrad);
+            filter: drop-shadow(0 0 4px rgba(41, 182, 242, 0.5));
+            opacity: 0.95;
+            animation: flowPulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes flowPulse {
+
+            0%,
+            100% {
+                opacity: 0.85;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         /* Info Box Styles */
@@ -180,7 +217,7 @@
             border: 2px solid #2c5aa0;
             border-radius: 8px;
             padding: 15px 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
@@ -233,7 +270,7 @@
             border: 2px solid #2c5aa0;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             z-index: 1001;
             opacity: 0;
             pointer-events: none;
@@ -356,7 +393,7 @@
         .town-tooltip-title {
             font-weight: 600;
             margin-bottom: 5px;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 3px;
         }
 
@@ -389,7 +426,7 @@
             color: white;
             font-size: 20px;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
             transition: all 0.3s ease;
             font-weight: bold;
         }
@@ -407,7 +444,7 @@
             background: white;
             padding: 12px 15px;
             border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             font-size: 11px;
         }
 
@@ -431,29 +468,77 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="header">
-        <div class="header-left">
-            <div class="logo">AP</div>
-            <div>
-                <div class="header-title">A P W R I M S</div>
-                <div class="header-subtitle">Andhra Pradesh Water Resources Information & Management System</div>
+    <!-- White Top Header -->
+    <div style="background: white; padding: 15px 0; border-bottom: 1px solid #e0e0e0;">
+        <div
+            style="max-width: 1600px; margin: 0 auto; padding: 0 15px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 50px; display: flex; justify-content: center; align-items: center;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                        alt="Satyameva Jayate" style="width: 45px; height: auto;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <div style="font-size: 13px; color: #333; font-weight: 500; margin-bottom: 4px;">Government of
+                        Andhra Pradesh | Water Resources Department</div>
+                    <div style="font-size: 18px; color: #000; font-weight: 700; line-height: 1.2;">Andhra Pradesh Water
+                        Resources Information & Management System</div>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div
+                    style="display: flex; align-items: center; border: 1px solid #ccc; border-radius: 4px; background: white; padding: 2px;">
+                    <input type="text" placeholder="Search..."
+                        style="border: none; padding: 8px 12px; font-size: 14px; outline: none; width: 250px;">
+                    <button
+                        style="border: none; background: transparent; cursor: pointer; font-size: 16px; padding: 0 8px; color: #1a3a52;">🔍</button>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span style="font-size: 20px; color: #1a3a52; cursor: pointer; opacity: 0.8;"
+                        title="Accessibility">♿</span>
+                </div>
             </div>
         </div>
-        <input type="text" class="search-box" placeholder="Search Here">
     </div>
 
+    <!-- Blue Navigation Bar -->
+    <div
+        style="background: #1a3a52; width: 100%; border-top: 1px solid #0d2538; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 999;">
+        <div style="max-width: 1600px; margin: 0 auto; padding: 0 15px;">
+            <ul style="list-style: none; display: flex; gap: 30px; padding: 0; margin: 0;">
+                <li style="padding: 15px 5px;">
+                    <a href="dashboard_with_live_ml.html"
+                        style="display: block; color: white; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px;">
+                        <span>←</span> Back to Dashboard
+                    </a>
+                </li>
+                <li style="padding: 15px 5px;"><a href="#"
+                        style="display: block; color: white; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.5px;">Visualization</a>
+                </li>
+                <li style="padding: 15px 5px;"><a href="#"
+                        style="display: block; color: white; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.5px;">Reports</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="page-heading-block">
+        <h1 class="page-heading">Visualize of water distribution</h1>
+        <p class="page-caption">From River to home</p>
+    </div>
     <div id="canvas-container">
         <svg id="visualization"></svg>
         <div class="info-btn" id="infoBtnToggle">ⓘ</div>
         <div class="town-tooltip" id="tooltip"></div>
         <div class="info-box" id="infoBox"></div>
-        
+
         <!-- Simplified Water Usage Display -->
         <div class="usage-table" id="usageTable">
             <button class="close-btn" onclick="hideUsageTable()">✕</button>
             <div class="usage-table-title">Water Usage Demands</div>
-            
+
             <div class="usage-item drinking">
                 <div class="usage-label">
                     <span class="usage-icon">💧</span>
@@ -510,7 +595,7 @@
 
     <script>
         const width = window.innerWidth;
-        const height = window.innerHeight - 70;
+        const height = window.innerHeight - 160;
         const svg = document.getElementById('visualization');
         svg.setAttribute('width', width);
         svg.setAttribute('height', height);
@@ -599,11 +684,29 @@
             ]
         };
 
+        // SVG defs: gradient for flow dots (water droplet look)
+        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        const grad = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
+        grad.setAttribute('id', 'flowDotGrad');
+        grad.setAttribute('cx', '30%');
+        grad.setAttribute('cy', '30%');
+        grad.setAttribute('r', '70%');
+        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop1.setAttribute('offset', '0%');
+        stop1.setAttribute('stop-color', '#81D4FA');
+        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop2.setAttribute('offset', '100%');
+        stop2.setAttribute('stop-color', '#0288D1');
+        grad.appendChild(stop1);
+        grad.appendChild(stop2);
+        defs.appendChild(grad);
+        svg.appendChild(defs);
+
         // Create SVG groups
         const pathsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         const flowGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         const nodesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        
+
         svg.appendChild(pathsGroup);
         svg.appendChild(flowGroup);
         svg.appendChild(nodesGroup);
@@ -612,15 +715,15 @@
         function createSmoothPath(x1, y1, x2, y2, curve = 0.25) {
             const dx = x2 - x1;
             const dy = y2 - y1;
-            const dist = Math.sqrt(dx*dx + dy*dy);
-            
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
             // Control point offset
             const offsetX = -dy * curve;
             const offsetY = dx * curve;
-            
+
             const cx = (x1 + x2) / 2 + offsetX;
             const cy = (y1 + y2) / 2 + offsetY;
-            
+
             return `M ${x1},${y1} Q ${cx},${cy} ${x2},${y2}`;
         }
 
@@ -632,22 +735,22 @@
             // Calculate angle for separation
             const angle = idx === 0 ? 210 : -30; // Left region vs right region
             const angleRad = angle * Math.PI / 180;
-            
+
             const rootX = data.root.x + Math.cos(angleRad) * data.root.radius;
             const rootY = data.root.y + Math.sin(angleRad) * data.root.radius;
-            
+
             // Connection point on region
             const toAngle = Math.atan2(rootY - region.y, rootX - region.x);
             const regionX = region.x + Math.cos(toAngle) * region.radius;
             const regionY = region.y + Math.sin(toAngle) * region.radius;
-            
+
             const pathData = createSmoothPath(rootX, rootY, regionX, regionY, 0.2);
-            
+
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', pathData);
             path.setAttribute('class', 'connection-path main-connection');
             pathsGroup.appendChild(path);
-            
+
             connections.push({
                 path: path,
                 dotCount: 6,
@@ -663,14 +766,14 @@
                 const angle = Math.atan2(muni.y - region.y, muni.x - region.x);
                 const startX = region.x + Math.cos(angle) * region.radius;
                 const startY = region.y + Math.sin(angle) * region.radius;
-                
+
                 const pathData = createSmoothPath(startX, startY, muni.x, muni.y, 0.15);
-                
+
                 const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 path.setAttribute('d', pathData);
                 path.setAttribute('class', 'connection-path');
                 pathsGroup.appendChild(path);
-                
+
                 connections.push({
                     path: path,
                     dotCount: 4,
@@ -686,7 +789,7 @@
                 rect.setAttribute('height', 36);
                 rect.setAttribute('class', 'municipality-rect');
                 nodesGroup.appendChild(rect);
-                
+
                 // Municipality text
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 text.setAttribute('x', muni.x);
@@ -716,13 +819,13 @@
                             townY,
                             0.08
                         );
-                        
+
                         const townPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                         townPath.setAttribute('d', townPathData);
                         townPath.setAttribute('class', 'connection-path');
                         townPath.style.strokeWidth = '1.5';
                         pathsGroup.appendChild(townPath);
-                        
+
                         connections.push({
                             path: townPath,
                             dotCount: 2,
@@ -740,11 +843,11 @@
                         square.setAttribute('class', 'town-square');
                         square.setAttribute('data-towns', towns.join(', '));
                         square.setAttribute('data-municipality', muni.name);
-                        
+
                         // Tooltip on hover
                         square.addEventListener('mouseenter', (e) => showTooltip(e, muni.name, towns));
                         square.addEventListener('mouseleave', hideTooltip);
-                        
+
                         nodesGroup.appendChild(square);
                     }
                 }
@@ -756,14 +859,14 @@
             circle.setAttribute('cy', region.y);
             circle.setAttribute('r', region.radius);
             circle.setAttribute('class', 'region-circle');
-            
+
             circle.addEventListener('click', (e) => {
                 e.stopPropagation();
                 showInfoBox(e, region.name, region.x, region.y);
             });
-            
+
             nodesGroup.appendChild(circle);
-            
+
             // Region text
             const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             text.setAttribute('x', region.x);
@@ -779,12 +882,12 @@
         rootCircle.setAttribute('cy', data.root.y);
         rootCircle.setAttribute('r', data.root.radius);
         rootCircle.setAttribute('class', 'node-circle');
-        
+
         rootCircle.addEventListener('click', (e) => {
             e.stopPropagation();
             showInfoBox(e, data.root.name, data.root.x, data.root.y);
         });
-        
+
         nodesGroup.appendChild(rootCircle);
 
         const rootText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -796,22 +899,22 @@
 
         // Create flow dots
         const flowDots = [];
-        
+
         connections.forEach(conn => {
             const groupCount = 2;
             const gapRatio = 0.35;
-            
+
             for (let group = 0; group < groupCount; group++) {
                 for (let i = 0; i < conn.dotCount; i++) {
                     const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                     dot.setAttribute('r', conn.dotRadius);
                     dot.setAttribute('class', 'flow-dot');
                     flowGroup.appendChild(dot);
-                    
+
                     const totalDots = conn.dotCount * groupCount + (groupCount - 1) * gapRatio * conn.dotCount;
                     const groupOffset = group * (conn.dotCount + gapRatio * conn.dotCount);
                     const offset = (groupOffset + i) / totalDots;
-                    
+
                     flowDots.push({
                         element: dot,
                         path: conn.path,
@@ -824,25 +927,25 @@
 
         // Animation loop
         let animationTime = 0;
-        
+
         function animate() {
             animationTime += 1;
-            
+
             flowDots.forEach(dot => {
                 const progress = (dot.offset + animationTime * dot.speed) % 1;
                 const length = dot.path.getTotalLength();
                 const point = dot.path.getPointAtLength(progress * length);
-                
+
                 dot.element.setAttribute('cx', point.x);
                 dot.element.setAttribute('cy', point.y);
-                
+
                 const fadeProgress = Math.sin(progress * Math.PI);
                 dot.element.setAttribute('opacity', fadeProgress * 0.9);
             });
-            
+
             requestAnimationFrame(animate);
         }
-        
+
         animate();
 
         // Info Box Functions
@@ -859,16 +962,16 @@
                 html += `<li>${item}</li>`;
             });
             html += '</ul>';
-            
+
             infoBox.innerHTML = html;
-            
+
             const boxWidth = 250;
             let left = centerX + 100;
             let top = centerY - 50;
-            
+
             if (left + boxWidth > width) left = centerX - boxWidth - 100;
             if (top < 70) top = 70;
-            
+
             infoBox.style.left = left + 'px';
             infoBox.style.top = top + 'px';
             infoBox.classList.add('visible');
@@ -914,26 +1017,27 @@
 
         // Town Tooltip
         const tooltip = document.getElementById('tooltip');
-        
+
         function showTooltip(event, municipality, towns) {
             const rect = event.target.getBoundingClientRect();
-            
+
             let html = `<div class="town-tooltip-title">${municipality} - Towns</div>`;
             html += '<ul class="town-list">';
             towns.forEach(town => {
                 html += `<li>${town}</li>`;
             });
             html += '</ul>';
-            
+
             tooltip.innerHTML = html;
             tooltip.style.left = (rect.left + rect.width + 10) + 'px';
             tooltip.style.top = (rect.top) + 'px';
             tooltip.classList.add('visible');
         }
-        
+
         function hideTooltip() {
             tooltip.classList.remove('visible');
         }
     </script>
 </body>
+
 </html>

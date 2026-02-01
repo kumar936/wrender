@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What-If Simulator | APMWRS</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
+    <style>
+        .whatif-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .whatif-header { background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%); color: white; padding: 20px 24px; border-radius: 12px; margin-bottom: 24px; }
+        .whatif-header h1 { margin: 0 0 8px 0; font-size: 24px; }
+        .whatif-header p { margin: 0; opacity: 0.9; font-size: 14px; }
+        .whatif-back { display: inline-block; margin-bottom: 16px; color: #2c5aa0; text-decoration: none; font-weight: 600; }
+        .whatif-back:hover { text-decoration: underline; }
+        .whatif-form { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 24px; }
+        .whatif-form .control-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px; }
+        .whatif-form label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; }
+        .whatif-form input, .whatif-form select { padding: 10px; border: 2px solid #ecf0f1; border-radius: 6px; font-size: 14px; width: 100%; }
+        .whatif-form .predict-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 28px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+        .whatif-form .predict-btn:hover { opacity: 0.95; transform: scale(1.02); }
+        .whatif-result { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 24px; }
+        .whatif-result h2 { margin: 0 0 16px 0; font-size: 18px; color: #2c3e50; }
+        .whatif-result .pred-value { font-size: 28px; font-weight: 700; color: #3498db; }
+        .whatif-result .change-msg { margin-top: 8px; font-size: 14px; }
+        .whatif-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; }
+        .whatif-chart-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .whatif-chart-card h3 { margin: 0 0 12px 0; font-size: 16px; color: #2c3e50; }
+    </style>
+</head>
+<body>
+    <div class="whatif-container">
+        <a href="/" class="whatif-back">← Back to Dashboard</a>
+        <div class="whatif-header">
+            <h1>What-If Simulator</h1>
+            <p>Change temperature, humidity, rainfall, and day type to see how ML predicts water demand and factor impact.</p>
+        </div>
+        <div class="whatif-form">
+            <div class="control-group">
+                <div class="control-item">
+                    <label>Municipality</label>
+                    <select id="whatif-municipality">
+                        <option value="">Loading…</option>
+                    </select>
+                </div>
+                <div class="control-item">
+                    <label>Temperature (°C)</label>
+                    <input type="number" id="whatif-temp" value="32" min="15" max="45">
+                </div>
+                <div class="control-item">
+                    <label>Humidity (%)</label>
+                    <input type="number" id="whatif-humidity" value="65" min="20" max="100">
+                </div>
+                <div class="control-item">
+                    <label>Day Type</label>
+                    <select id="whatif-day-type">
+                        <option value="weekday">Weekday</option>
+                        <option value="weekend">Weekend</option>
+                        <option value="holiday">Holiday</option>
+                    </select>
+                </div>
+                <div class="control-item">
+                    <label>Rainfall (mm)</label>
+                    <input type="number" id="whatif-rainfall" value="0" min="0" max="100">
+                </div>
+            </div>
+            <button class="predict-btn" id="whatif-predict-btn">Get Prediction</button>
+        </div>
+        <div class="whatif-result" id="whatif-result" style="display: none;">
+            <h2>Prediction result</h2>
+            <div class="pred-value" id="whatif-pred-value">-- M L</div>
+            <div class="change-msg" id="whatif-change-msg"></div>
+        </div>
+        <div class="whatif-charts" id="whatif-charts" style="display: none;">
+            <div class="whatif-chart-card">
+                <h3>Factor impact (contribution)</h3>
+                <div id="whatif-pie"></div>
+            </div>
+            <div class="whatif-chart-card">
+                <h3>Predicted vs baseline</h3>
+                <div id="whatif-bar"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/what_if.js"></script>
+</body>
+</html>

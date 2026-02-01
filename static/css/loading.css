@@ -1,0 +1,99 @@
+/* Water-themed loading animation - quick (~1.2s) */
+.water-loader,
+.loading-modal .water-loader-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.water-loader .loader-wrapper,
+.loading-modal .loader-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.water-loader .vessel,
+.loading-modal .vessel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.9);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1), inset 0 0 12px rgba(0,119,255,0.1);
+  background: rgba(255,255,255,0.2);
+  overflow: hidden;
+}
+
+.water-loader .water,
+.loading-modal .water {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #00d4ff 0%, #0077ff 70%, #2c5aa0 100%);
+  transform: translateY(100%);
+  animation: waterFillUp 1.2s ease-out forwards;
+}
+
+.water-loader .wave,
+.loading-modal .wave {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 200%;
+  height: 36px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="white" opacity="0.5"></path></svg>');
+  background-size: 50% 100%;
+  animation: waterWaveMove 0.8s linear infinite;
+}
+
+.water-loader .wave-back,
+.loading-modal .wave-back {
+  top: -34px;
+  opacity: 0.6;
+  animation: waterWaveMove 1s linear infinite reverse;
+}
+
+.water-loader .bubble,
+.loading-modal .bubble {
+  position: absolute;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  bottom: 0;
+  animation: waterRise 1s ease-in infinite;
+}
+
+@keyframes waterFillUp {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(28%); }
+}
+
+@keyframes waterWaveMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes waterRise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  40% { opacity: 0.7; }
+  100% { transform: translateY(-70px) scale(1); opacity: 0; }
+}
+
+.water-loader .loading-text,
+.loading-modal .water-loading-text {
+  color: rgba(255,255,255,0.95);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  animation: waterPulse 1s ease-in-out infinite;
+}
+
+@keyframes waterPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}

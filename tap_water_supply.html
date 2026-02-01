@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJM Report - Andhra Pradesh</title>
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/dashboard.css" /> <!-- Base nav styles -->
+    <link rel="stylesheet" href="/static/css/tap_water.css" />
+</head>
+
+<body>
+
+    <!-- Header (Government Style) -->
+    <div class="top-header">
+        <div class="top-header-content">
+            <div class="header-left">
+                <div class="emblem-container">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
+                        class="emblem-img">
+                </div>
+                <div class="header-text-block">
+                    <div class="gov-text">Government of Andhra Pradesh | Water Resources Department</div>
+                    <div class="dept-text">Jal Jeevan Mission - Har Ghar Jal Report</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="search-bar-container">
+                    <input type="text" placeholder="Search..." class="gov-search-input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="main-navbar">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li class="nav-item-link"><a href="/">Home</a></li>
+                <li class="nav-item-link"><a href="#" onclick="alert('Coming Soon')">Department</a></li>
+                <li class="nav-item-link active"><a href="tap_water_supply.html">Tap Water Supply in Households</a></li>
+                <li class="nav-item-link"><a href="water_distribution.html">Intro</a></li>
+                <li class="nav-item-link"><a href="what_if.html">What-If Analysis</a></li>
+                <li class="nav-item-link"><a href="about_us.html">About Us</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Action Bar -->
+        <div class="action-bar">
+            <button class="download-btn" onclick="downloadReport()">⬇ Download PDF</button>
+        </div>
+
+        <div class="top-section">
+            <!-- Map Card -->
+            <div class="map-card">
+                <div class="card-header">
+                    <span>Tap water supply in households (HHs)</span>
+                    <span class="sub">Andhra Pradesh | As on 31 Jan 2026</span>
+                </div>
+                <div id="andhra-map"></div>
+                <div style="margin-top: 10px; font-size: 0.8rem; color: #666; text-align: center;">
+                    *Showing 10 Project Municipalities
+                </div>
+            </div>
+
+            <!-- Stats Panel -->
+            <div class="stats-panel">
+
+                <!-- Main Status Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <span>Andhra Pradesh | Status of tap water supply in rural homes</span>
+                    </div>
+
+                    <div class="main-stat-grid">
+                        <div class="stat-item">
+                            <p>Total number of households (HHs)</p>
+                            <h3 style="color: #BA4A00;">95,53,169</h3>
+                        </div>
+                        <div class="stat-item green">
+                            <p>Households with tap water connections (2019)</p>
+                            <h3>30,74,310</h3>
+                            <span style="font-size: 0.8rem;">(32.18%)</span>
+                        </div>
+                        <div class="stat-item blue">
+                            <p>Remaining households</p>
+                            <h3>64,78,859</h3>
+                        </div>
+                    </div>
+
+                    <div class="stat-divider"></div>
+
+                    <div class="sub-stats">
+                        <div>
+                            <p class="sub-stat-label">Households provided since launch</p>
+                            <div class="sub-stat-value" style="color: #1565C0;">40,72,608 <span
+                                    style="font-size: 1rem;">(62.86%)</span></div>
+                        </div>
+                        <div>
+                            <p class="sub-stat-label">Households with connection as on date</p>
+                            <div class="sub-stat-value" style="color: #1565C0;">71,46,918 <span
+                                    style="font-size: 1rem;">(74.81%)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Har Ghar Jal Status -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <span>Har Ghar Jal Status <span id="info-icon" style="cursor:pointer;"
+                                title="Click for info">ℹ️</span></span>
+                    </div>
+                    <div class="status-grid">
+                        <div class="status-box blue">
+                            <div class="box-title">Districts</div>
+                            <div class="box-number">26</div>
+                            <div class="box-sub"><span>Reported: 1</span><span>Certified: 0</span></div>
+                        </div>
+                        <div class="status-box pink">
+                            <div class="box-title">Blocks</div>
+                            <div class="box-number">659</div>
+                            <div class="box-sub"><span>Reported: 124</span><span>Certified: 112</span></div>
+                        </div>
+                        <div class="status-box purple">
+                            <div class="box-title">Panchayats</div>
+                            <div class="box-number">11,109</div>
+                            <div class="box-sub"><span>Reported: 3087</span><span>Certified: 2736</span></div>
+                        </div>
+                        <div class="status-box green">
+                            <div class="box-title">Villages</div>
+                            <div class="box-number">15,999</div>
+                            <div class="box-sub"><span>Reported: 4786</span><span>Certified: 3710</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Village Progress -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <span>Status of progress in village</span>
+                        <span class="sub">Total Village: 15,999</span>
+                    </div>
+                    <div class="village-progress-grid">
+                        <div class="vp-card blue">
+                            <div style="font-size: 0.8rem;">Villages with 100% HH tap connection</div>
+                            <div class="vp-number">5,345</div>
+                        </div>
+                        <div class="vp-card pink">
+                            <div style="font-size: 0.8rem;">Villages where WS work in progress</div>
+                            <div class="vp-number">10,634</div>
+                        </div>
+                        <div class="vp-card green">
+                            <div style="font-size: 0.8rem;">Villages where WS work yet to start</div>
+                            <div class="vp-number">20</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bottom-section">
+            <!-- Progress Chart -->
+            <div class="info-card" style="grid-column: span 1;">
+                <div class="card-header">
+                    <span>Progress: HHs provided with tap water supply</span>
+                    <div>
+                        <button style="padding: 2px 8px; font-size: 0.8rem;">Yearly</button>
+                        <button style="padding: 2px 8px; font-size: 0.8rem;">Cumulative</button>
+                    </div>
+                </div>
+                <div id="progress-chart" class="graph-container"></div>
+            </div>
+
+            <!-- New Status Chart -->
+            <div class="info-card" style="grid-column: span 1;">
+                <div class="card-header">
+                    <span>[-] Status of households with tap water connection</span>
+                </div>
+                <!-- Toggle for Date selection if needed, or just the chart -->
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <label style="margin-right: 15px;"><input type="radio" name="statusDate" value="2019"> As on 15 Aug
+                        2019</label>
+                    <label><input type="radio" name="statusDate" value="today" checked> As on date</label>
+                </div>
+                <div id="status-chart" class="graph-container"></div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-card">
+                <div class="card-header">
+                    <span>Har Ghar Jal Status | Andhra Pradesh</span>
+                    <button class="download-btn" style="font-size: 0.7rem;" onclick="downloadTableCSV()">⬇ CSV</button>
+                </div>
+                <div style="overflow-x: auto; max-height: 400px; overflow-y: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>District</th>
+                                <th>Villages reported 100% tap connection</th>
+                                <th>Villages Certified</th>
+                                <th>(%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2><span
+                        style="background: #ccc; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; font-size: 0.9rem;">i</span>
+                    About Har Ghar Jal</h2>
+            </div>
+            <div class="modal-body">
+                <p><strong>Har Ghar Jal (HGJ)</strong> means all households in that administrative unit are provided
+                    with tap water supply. There are three stages for Har Ghar Jal declaration process.</p>
+                <p><strong>Stage 1:</strong> The households that are provided with tap water connection are noted in JJM
+                    IMIS after verification of name and Aadhaar number of head of household. Once all households of the
+                    village are noted in JJM IMIS the villages acquires status of village with 100% tap water
+                    connection.</p>
+                <p><strong>Stage 2:</strong> 'Reported' means water supply department of State/ UT has confirmed that
+                    water is being supplied through taps to all households, schools and Anganwadi Centers in that
+                    administrative unit.</p>
+                <p><strong>Stage 3:</strong> 'Certified' means that the Gram Sabha has passed the resolution after
+                    ascertaining the claim of water supply department that all the households, schools and Anganwadi
+                    Centers are getting the tap water supply in village. This is carried out after the water supply
+                    department provided the certificate to Gram Panchayat declaring that all households are provided
+                    with tap water supply.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/tap_water.js"></script>
+</body>
+
+</html>

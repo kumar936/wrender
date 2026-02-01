@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Daily Water Consumption Forecast</title>
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/dashboard.css" /> <!-- Base nav styles -->
+    <link rel="stylesheet" href="/static/css/about_us.css" />
+</head>
+
+<body>
+
+    <!-- Header (Government Style) -->
+    <div class="top-header">
+        <div class="top-header-content">
+            <div class="header-left">
+                <div class="emblem-container">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
+                        class="emblem-img">
+                </div>
+                <div class="header-text-block">
+                    <div class="gov-text">Government of Andhra Pradesh | Water Resources Department</div>
+                    <div class="dept-text">Jal Jeevan Mission - Har Ghar Jal Report</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="search-bar-container">
+                    <input type="text" placeholder="Search..." class="gov-search-input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="main-navbar">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li class="nav-item-link"><a href="/">Home</a></li>
+                <li class="nav-item-link"><a href="#" onclick="alert('Coming Soon')">Department</a></li>
+                <li class="nav-item-link"><a href="tap_water_supply.html">Tap Water Supply in Households</a></li>
+                <li class="nav-item-link"><a href="water_distribution.html">Intro</a></li>
+                <li class="nav-item-link"><a href="what_if.html">What-If Analysis</a></li>
+                <li class="nav-item-link active"><a href="about_us.html">About Us</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container fade-in">
+
+        <h1 class="project-title">Daily Water Consumption Forecast and Demand Analysis</h1>
+
+        <div class="cards-grid">
+
+            <!-- Box 1: Our Team -->
+            <div class="card" onclick="openModal('teamModal')">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2 class="card-title">Our Team</h2>
+                <div class="card-overlay">
+                    <span>View Team Members</span>
+                </div>
+            </div>
+
+            <!-- Box 2: Tools & Tech Stack -->
+            <div class="card" onclick="openModal('techModal')">
+                <div class="card-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h2 class="card-title">Tools & Tech Stack</h2>
+                <div class="card-overlay">
+                    <span>View Technologies</span>
+                </div>
+            </div>
+
+            <!-- Box 3: Project Snippet -->
+            <div class="card snippet-card" onclick="openModal('snippetModal')">
+                <div class="card-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h2 class="card-title">Project Snippet</h2>
+                <div class="card-overlay">
+                    <span>View Model Code</span>
+                </div>
+                <!-- 
+                <div class="snippet-preview">
+                    <div class="bar-snippet">
+                        <div style="height: 40%;"></div>
+                        <div style="height: 70%;"></div>
+                        <div style="height: 50%;"></div>
+                        <div style="height: 80%;"></div>
+                        <div style="height: 60%;"></div>
+                    </div>
+                </div> 
+                -->
+            </div>
+
+        </div>
+
+        <div class="footer-batch">
+            Batch 12
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+
+    <!-- Team Modal -->
+    <div id="teamModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('teamModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-users"></i> Our Team (Batch 12)</h2>
+            </div>
+            <div class="modal-body">
+                <div class="team-list">
+                    <div class="team-member">
+                        <div class="member-avatar">S</div>
+                        <div class="member-info">
+                            <h3>Sowmya</h3>
+                            <p>Team Member</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">K</div>
+                        <div class="member-info">
+                            <h3>Kumara Swami</h3>
+                            <p>Team Member</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">N</div>
+                        <div class="member-info">
+                            <h3>Neeraja</h3>
+                            <p>Team Member</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">H</div>
+                        <div class="member-info">
+                            <h3>Himabindu</h3>
+                            <p>Team Member</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">V</div>
+                        <div class="member-info">
+                            <h3>Venkata Prasad</h3>
+                            <p>Team Member</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech Stack Modal -->
+    <div id="techModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('techModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-microchip"></i> Tools & Tech Stack</h2>
+            </div>
+            <div class="modal-body">
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <i class="fab fa-python" style="color: #3776AB;"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-brain" style="color: #FF6F00;"></i>
+                        <span>Machine Learning</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-database" style="color: #00758F;"></i>
+                        <span>Data Analysis</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-chart-bar" style="color: #4CAF50;"></i>
+                        <span>Forecasting</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-server" style="color: #F29111;"></i>
+                        <span>SQL</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-project-diagram" style="color: #9C27B0;"></i>
+                        <span>Visualization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snippet Modal -->
+    <div id="snippetModal" class="modal">
+        <div class="modal-content" style="width: 800px; max-width: 90%;">
+            <span class="close-modal" onclick="closeModal('snippetModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-code"></i> Model Training Snippet</h2>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 15px; color: #666;">Core Random Forest implementation from our project:</p>
+                <div class="code-block"
+                    style="background: #282c34; padding: 20px; border-radius: 8px; color: #abb2bf; text-align: left; overflow-x: auto; font-family: 'Consolas', 'Monaco', monospace; font-size: 0.9rem;">
+                    <pre style="margin: 0;">
+<span style="color: #c678dd;"># Create Random Forest Regressor</span>
+model = <span style="color: #e5c07b;">RandomForestRegressor</span>(
+    n_estimators=<span style="color: #d19a66;">100</span>,        <span style="color: #5c6370;"># Number of trees in the forest</span>
+    max_depth=<span style="color: #d19a66;">20</span>,            <span style="color: #5c6370;"># Maximum depth of each tree</span>
+    min_samples_split=<span style="color: #d19a66;">5</span>,     <span style="color: #5c6370;"># Minimum samples to split a node</span>
+    min_samples_leaf=<span style="color: #d19a66;">2</span>,      <span style="color: #5c6370;"># Minimum samples in a leaf node</span>
+    random_state=<span style="color: #d19a66;">42</span>,         <span style="color: #5c6370;"># For reproducibility</span>
+    n_jobs=-<span style="color: #d19a66;">1</span>,               <span style="color: #5c6370;"># Use all CPU cores</span>
+    verbose=<span style="color: #d19a66;">1</span>                <span style="color: #5c6370;"># Show progress</span>
+)
+
+<span style="color: #c678dd;">print</span>(<span style="color: #98c379;">"Training the model..."</span>)
+model.<span style="color: #61afef;">fit</span>(X_train, y_train)
+
+<span style="color: #c678dd;">print</span>(<span style="color: #98c379;">"✓ Model training completed!"</span>)
+</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/about_us.js"></script>
+</body>
+
+</html>
