@@ -16,8 +16,8 @@ import os
 # Base directory for deployment (works when run from any cwd)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Initialize Flask app with static folder for CSS/JS
-app = Flask(__name__, static_folder=os.path.join(BASE_DIR, 'static'))
+# Initialize Flask app (Disable default static handler to use custom one)
+app = Flask(__name__, static_folder=None)
 CORS(app)
 
 # Setup logging
@@ -485,8 +485,50 @@ def serve_water_distribution_html():
         logger.error(f"Error serving water_distribution.html: {e}")
         return jsonify({'error': 'Water distribution page not found'}), 404
 
+# Custom static file serving to resolve Render 404 issues
+@app.route('/static/<path:filename>')
+def custom_static(filename):
+    """Serve files from the static directory explicitly"""
+    try:
+        file_path = os.path.join(BASE_DIR, 'static', filename)
+        
+        # Security check: ensure path is within static folder
+        real_static = os.path.realpath(os.path.join(BASE_DIR, 'static'))
+        real_path = os.path.realpath(file_path)
+        if not real_path.startswith(real_static):
+             return jsonify({'error': 'Access denied'}), 403
+             
+        if not os.path.isfile(file_path):
+            logger.error(f"Static file not found: {file_path}")
+            return jsonify({'error': 'File not found'}), 404
+            
+        # Determine MIME type explicitly
+        mime_types = {
+            '.css': 'text/css',
+            '.js': 'application/javascript',
+            '.html': 'text/html',
+            '.json': 'application/json',
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.svg': 'image/svg+xml'
+        }
+        
+        _, ext = os.path.splitext(filename)
+        mimetype = mime_types.get(ext.lower())
+        
+        if not mimetype:
+            import mimetypes
+            # Try system registry
+            mimetype, _ = mimetypes.guess_type(file_path)
+            
+        return send_file(file_path, mimetype=mimetype or 'application/octet-stream')
+    except Exception as e:
+        logger.error(f"Error serving static file {filename}: {e}")
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/<path:filename>')
-def serve_static(filename):
+def serve_root_files(filename):
     """Serve static HTML files from BASE_DIR (CSS/JS served by Flask static_folder)"""
     try:
         # Define explicit MIME types to ensure correct serving even if system registry is empty
